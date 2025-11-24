@@ -2,48 +2,50 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    
-    public float distance = 3f;   // how far to move left/right
-    public float speed = 2f;      // movement speed
+    public float speed = 3f;
+    public float distance = 0.5f;
 
     private Vector3 startPos;
-    private int direction = 1;
+    private bool movingRight = true;
 
-    void Start()
+    private void Start()
     {
-        // remember the starting position
         startPos = transform.position;
     }
 
-    void Update()
+    private void Update()
     {
-        // move platform along X axis
-        transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
-
-        // check distance from start
-        if (Mathf.Abs(transform.position.x - startPos.x) >= distance)
+        if (movingRight)
         {
-            // flip direction
-            direction *= -1;
+            transform.position += Vector3.right * speed * Time.deltaTime;
+            if (Vector3.Distance(transform.position, startPos) >= distance)
+                movingRight = false;
+        }
+        else
+        {
+            transform.position -= Vector3.right * speed * Time.deltaTime;
+            if (Vector3.Distance(transform.position, startPos) <= 0.1f)
+                movingRight = true;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!gameObject.activeInHierarchy) return;
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            // make player a child so they ride the platform
             collision.transform.SetParent(transform);
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
+        if (!gameObject.activeInHierarchy) return;
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            // detach player when leaving
             collision.transform.SetParent(null);
         }
     }
 }
-
