@@ -13,12 +13,13 @@ public class PlayerController : MonoBehaviour
 
     // Private variables are used internally by the script.
     private Rigidbody2D rb;            // Reference to the Rigidbody2D component
-    //private bool isGrounded;           // True if player is standing on ground
-
+    private bool isGrounded;           // True if player is standing on ground
+    private Animator animator; // a reference to the players animator
     void Start()
     {
         // Grab the Rigidbody2D attached to the Player object once at the start.
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -44,5 +45,30 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
         */
+    }
+    private void SetAnimation(float moveInput)
+    {
+        if(isGrounded)
+        {
+            if (moveInput == 0)
+            {
+                animator.Play("Player_idle"); //play idle animation
+            }
+            else
+            {
+                animator.Play("Player_run"); //play run animation
+            }
+        }
+        else
+        {
+            if(rb.linearVelocityY > 0)
+            {
+                animator.Play("Player_Jump"); // play jump animation
+            }
+            else
+            {
+                animator.Play("Player_Fall"); // play fall animation
+            }
+        }
     }
 }
