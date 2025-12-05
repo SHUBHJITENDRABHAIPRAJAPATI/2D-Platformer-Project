@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 2429097251994109768}
   - component: {fileID: 4167416680448651726}
   - component: {fileID: 1985556630628016066}
-  - component: {fileID: -8223020649635646968}
   - component: {fileID: 7708639537308800606}
   - component: {fileID: -757819253247914380}
   m_Layer: 0
@@ -63,8 +62,8 @@ Transform:
   m_GameObject: {fileID: 8870473528084211757}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.9, y: 0.5, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5587884620128921480}
@@ -213,25 +212,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e44143342e79904f88d9e8d948b97c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coins: 0
   moveSpeed: 4
---- !u!114 &-8223020649635646968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8870473528084211757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b9d7dedb2f62bd468fe964cc665610b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoubleJump
+  jumpForce: 8
   extraJumpsValue: 1
   groundCheck: {fileID: 5587884620128921480}
+  groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  jumpForce: 5
 --- !u!95 &7708639537308800606
 Animator:
   serializedVersion: 7
@@ -268,3 +257,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   health: 100
   damageAmount: 25
+  healthImage: {fileID: 0}
