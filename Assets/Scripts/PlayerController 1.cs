@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 
     // --- Movement & Animation ---
     private Animator animator;             // Reference to Animator for controlling animations
-    public float moveSpeed = 4f;           // How fast the player moves left/right
+    public float moveSpeed = 5f;           // How fast the player moves left/right
 
     // --- Jump variables ---
-    public float jumpForce = 8f;           // Base jump force (vertical speed)
+    public float jumpForce = 10f;           // Base jump force (vertical speed)
     public int extraJumpsValue = 1;        // How many extra jumps allowed (1 = double jump, 2 = triple jump)
     private int extraJumps;                // Counter for jumps left
 
@@ -95,4 +95,22 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("BouncePad"))
+        {
+            // Multiply jump force (2x recommended)
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 2f);
+
+            // Play bounce sound if available
+           /* if (soundManager != null)
+            {
+                soundManager.PlaySound("SQUASH");
+            }
+           */
+        }
+    }
+
+
 }
