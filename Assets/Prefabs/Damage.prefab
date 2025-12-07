@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4813889790573976651}
   - component: {fileID: 4738772849570342188}
-  - component: {fileID: 100073275919738046}
   - component: {fileID: 7182263134209233304}
+  - component: {fileID: 4115236019507405330}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Damage
@@ -92,7 +92,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &100073275919738046
+--- !u!114 &7182263134209233304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510907736011547121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efb0c1ebc929cc47b2a870264dd27bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TakingDamage
+--- !u!60 &4115236019507405330
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,22 +150,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.024999999, y: 0.044999998}
+    - - {x: 0.0040979343, y: 0.044999994}
+      - {x: -0.024999999, y: 0.044999998}
       - {x: -0.085, y: -0.015}
       - {x: -0.085, y: -0.044999998}
       - {x: 0.085, y: -0.044999998}
       - {x: 0.085, y: -0.024999999}
       - {x: 0.015, y: 0.044999998}
   m_UseDelaunayMesh: 0
---- !u!114 &7182263134209233304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1510907736011547121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efb0c1ebc929cc47b2a870264dd27bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TakingDamage
