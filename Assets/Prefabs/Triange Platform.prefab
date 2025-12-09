@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8367150074603898251}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triange Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,6 +41,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8367150074603898251}
     m_Modifications:
+    - target: {fileID: 889495372331608983, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 970859679524514965, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196707901765300600, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3935673938113790269, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4474062740109759240, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.32163
@@ -85,6 +101,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform Down
       objectReference: {fileID: 0}
+    - target: {fileID: 7101396506929931589, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7944723312681740166, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990527301293574651, guid: 56167d1e1a45e6d428211a1d923a030a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -106,6 +134,34 @@ PrefabInstance:
     - target: {fileID: 2975893965783371818, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
       propertyPath: m_Name
       value: Platform Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975893965783371818, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359514212631017010, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3752666652471559281, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081352873866817854, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939274443598185067, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439351188267450419, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511154140992316854, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8688712425483801575, guid: fd9d404820eaec74a82b803f43c3e63d, type: 3}
       propertyPath: m_LocalPosition.x
