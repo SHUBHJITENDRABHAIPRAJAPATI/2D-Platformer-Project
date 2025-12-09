@@ -95,4 +95,23 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+
+    {
+
+        if (collision.CompareTag("BouncePad"))
+
+        {
+
+        }
+
+        // Apply a stronger upward velocity when hitting the bounce pad
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 24);
+
+        // Play squash sound effect
+        //SoundManager.Instance.PlaySFX("SQUASH");
+        
+    }
+
 }
