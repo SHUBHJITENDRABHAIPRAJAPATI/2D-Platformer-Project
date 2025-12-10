@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         {
             
             // Apply a stronger upward velocity when hitting the bounce pad
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 24);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 2f);
 
            
             // Play squash sound effect
