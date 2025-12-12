@@ -1182,6 +1182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NextLevel
   nextLevelName: Level3
+  nextLevelValue: 3
 --- !u!114 &843915996
 MonoBehaviour:
   m_ObjectHideFlags: 0
