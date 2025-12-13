@@ -20,7 +20,9 @@ public class PlayerHealth : MonoBehaviour
         health -= damageAmount;          // subtract damage amount
         UpdateHealthBar();               // update the health bar
 
-        //SoundManager.Instance.PlaySFX("HURT");   // 🔊 NEW
+        // 🔊 Step 19: Play hurt sound
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySFX("HURT");
 
         StartCoroutine(BlinkRed());      // briefly flash red
 
@@ -39,7 +41,11 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-       SceneManager.LoadScene("MainScene");
+        // 🔊 Step 19: Play death sound (optional)
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySFX("DIE");
+
+        SceneManager.LoadScene("MainScene");
     }
 
     private void UpdateHealthBar()

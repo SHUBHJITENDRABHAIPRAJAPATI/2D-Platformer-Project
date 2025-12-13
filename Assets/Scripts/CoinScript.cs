@@ -17,7 +17,10 @@ public class CoinScript : MonoBehaviour
                 player.coins += coinValue;   // ➤ ADD CORRECT VALUE
             }
 
-            // SoundManager.Instance.PlaySFX("COIN", 0.4f);  
+            // 🔊 Step 19: Play coin sound
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("COIN", 0.4f);
+
             Destroy(gameObject);
         }
     }
