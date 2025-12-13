@@ -5,130 +5,136 @@ public class PlayerController : MonoBehaviour
     public int coins;
 
     // --- Movement & Animation ---
-    private Animator animator;             // Reference to Animator for controlling animations
-    public float moveSpeed = 4f;           // How fast the player moves left/right
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    public float moveSpeed = 4f;
+
+    // Speed boost
+    private float originalSpeed;
+    private bool isSpeedBoosted = false;
 
     // --- Jump variables ---
-    public float jumpForce = 8f;           // Base jump force (vertical speed)
-    public int extraJumpsValue = 1;        // How many extra jumps allowed (1 = double jump, 2 = triple jump)
-    private int extraJumps;                // Counter for jumps left
+    public float jumpForce = 8f;
+    public int extraJumpsValue = 1;
+    private int extraJumps;
 
-    public Transform groundCheck;          // Empty child object placed at the player's feet
-    public float groundCheckRadius = 0.2f; // Size of the circle used to detect ground
-    public LayerMask groundLayer;          // Which layer counts as "ground" (set in Inspector)
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer;
 
-    // --- Internal state ---
-    private Rigidbody2D rb;                // Reference to the Rigidbody2D component
-    private bool isGrounded;               // True if player is standing on ground
+    private Rigidbody2D rb;
+    private bool isGrounded;
 
     void Start()
     {
-        // Grab references once at the start
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        originalSpeed = moveSpeed;
+
+        // Movement feel polish
+        rb.freezeRotation = true;
+        rb.gravityScale = 3f;
     }
 
     void Update()
     {
-        // --- Horizontal movement ---
-        // Get input from keyboard (A/D or Left/Right arrows).
         float moveInput = Input.GetAxis("Horizontal");
 
-        // Apply horizontal speed while keeping the current vertical velocity.
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        //############################ for  Smooth horizontal movement
+        float targetSpeed = moveInput * moveSpeed;
+        rb.linearVelocity = new Vector2(
+            Mathf.Lerp(rb.linearVelocity.x, targetSpeed, 0.15f),
+            rb.linearVelocity.y
+        );
 
-        // --- Ground check ---
-        // Create an invisible circle at the GroundCheck position.
-        // If this circle overlaps any collider on the "Ground" layer, player is grounded.
+        // Ground check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Reset extra jumps when grounded
         if (isGrounded)
         {
             extraJumps = extraJumpsValue;
         }
 
-        // --- Jump & Double Jump ---
-        // If Space is pressed:
+        // Jump & double jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
             {
-                // Normal jump
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-
-                //play jump sound
                 SoundManager.Instance.PlaySFX("JUMP");
             }
             else if (extraJumps > 0)
             {
-                // Extra jump (double or triple depending on extraJumpsValue)
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                extraJumps--; // Reduce available extra jumps
-                //play jump sound
+                extraJumps--;
                 SoundManager.Instance.PlaySFX("JUMP");
             }
         }
 
-        // --- Animations ---
+        //  ++++++++++++++++Faster fall for better jump feel
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * 1.5f * Time.deltaTime;
+        }
+
+        // ______________________ Flip sprite when moving
+        if (moveInput != 0)
+        {
+            transform.localScale = new Vector3(Mathf.Sign(moveInput), 1, 1);
+        }
+
         SetAnimation(moveInput);
+    }
+
+    // Speed power-up 
+    public void ActivateSpeedBoost(float boostMultiplier, float duration)
+    {
+        if (!isSpeedBoosted)
+        {
+            StartCoroutine(SpeedBoostCoroutine(boostMultiplier, duration));
+        }
+    }
+
+    private System.Collections.IEnumerator SpeedBoostCoroutine(float multiplier, float duration)
+    {
+        isSpeedBoosted = true;
+        moveSpeed = originalSpeed * multiplier;
+
+        // Optional visual feedback
+        spriteRenderer.color = Color.yellow;
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originalSpeed;
+        spriteRenderer.color = Color.white;
+        isSpeedBoosted = false;
     }
 
     private void SetAnimation(float moveInput)
     {
-        // Handle animations based on grounded state and movement
         if (isGrounded)
         {
             if (moveInput == 0)
-            {
-                animator.Play("Player_Idle"); // Idle animation when not moving
-            }
+                animator.Play("Player_Idle");
             else
-            {
-                animator.Play("Player_Run");  // Run animation when moving
-            }
+                animator.Play("Player_Run");
         }
         else
         {
             if (rb.linearVelocityY > 0)
-            {
-                animator.Play("Player_Jump"); // Jump animation when moving upward
-            }
+                animator.Play("Player_Jump");
             else
-            {
-                animator.Play("Player_Fall"); // Fall animation when moving downward
-            }
+                animator.Play("Player_Fall");
         }
     }
-
-    private void Die()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
-
     {
-        
-
         if (collision.CompareTag("BouncePad"))
-
         {
-            
-            // Apply a stronger upward velocity when hitting the bounce pad
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 2f);
-
-           
-            // Play squash sound effect
-            //SoundManager.Instance.PlaySFX("SQUASH");
-
         }
-
-
-
-
     }
-
-
 }
